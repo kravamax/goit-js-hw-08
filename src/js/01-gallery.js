@@ -1,17 +1,14 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 // Change code below this line
-// Описан в документации
 import SimpleLightbox from 'simplelightbox';
-// Дополнительный импорт стилей
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   gallery: document.querySelector('.gallery'),
-  galleryMarkup: createMarkup(galleryItems),
 };
 
-renderMarkup(refs.galleryMarkup);
+renderMarkup(galleryItems);
 
 let modal = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -20,8 +17,8 @@ let modal = new SimpleLightbox('.gallery a', {
 
 refs.gallery.addEventListener('click', galleryItemClick);
 
-function createMarkup(array) {
-  return array
+function renderMarkup(array) {
+  const markup = array
     .map(({ preview, original, description }) => {
       return `
         <a class="gallery__item" href="${original}">
@@ -30,22 +27,18 @@ function createMarkup(array) {
         `;
     })
     .join('');
-}
 
-function renderMarkup(markup) {
   refs.gallery.insertAdjacentHTML('afterbegin', markup);
 }
 
 function galleryItemClick(e) {
   e.preventDefault();
 
-  if (!(e.target !== e.currentTarget)) {
-    return;
-  }
+  if (e.target === e.currentTarget) return;
 
   openModal();
 }
 
 function openModal() {
-  modal.on('show.simplelightbox', function () {});
+  modal.on('show.simplelightbox');
 }
