@@ -17,8 +17,8 @@ function handleSubmit(e) {
 
   const formDataFromElem = e.currentTarget.elements;
 
-  if (refs.form.email.value === '' || refs.form.message.value === '') {
-    alert('You have to fill all fields!');
+  if (!refs.form.email.value || !refs.form.message.value) {
+    return alert('You have to fill in all fields!');
   }
 
   console.log(formDataFromElem);
