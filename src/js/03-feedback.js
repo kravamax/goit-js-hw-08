@@ -17,6 +17,10 @@ function handleSubmit(e) {
 
   const formDataFromElem = e.currentTarget.elements;
 
+  if (refs.form.email.value === '' || refs.form.message.value === '') {
+    alert('You have to fill all fields!');
+  }
+
   console.log(formDataFromElem);
 
   e.currentTarget.reset();
@@ -36,8 +40,6 @@ function inputDataFill(e) {
 
 function checkLocalStorageForData() {
   const dataStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-  console.log(dataStorage);
 
   if (dataStorage) {
     refs.form.email.value = dataStorage.email;
